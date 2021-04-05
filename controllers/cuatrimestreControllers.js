@@ -2,6 +2,7 @@ const Cuatrimestre = require("../models/cuatrimesteModel");
 const { validationResult } = require("express-validator");
 
 
+//Agregar cuatrimestre a una licenciatura
 exports.agregandoCuatrismestre = async ( req, res ) => {
     
     const error = validationResult(req);
@@ -28,6 +29,7 @@ exports.agregandoCuatrismestre = async ( req, res ) => {
     }
 }
 
+//Obtener cuatrismestre por licenciatura
 exports.obtenerCuatrimestreLicenciatura = async ( req, res ) => {
 
     const id = req.params.id;
@@ -35,6 +37,12 @@ exports.obtenerCuatrimestreLicenciatura = async ( req, res ) => {
     try {
 
         let cuatrimestre = await Cuatrimestre.find( { licenciatura: id } );
+
+        /*
+        if( !cuatrimestre.isEmpty() ){
+            return res.status(400).json({ ok: false, errores: "No hay Elementos"});
+        }*/
+
         res.json({
             ok: true,
             cuatrimestre
@@ -43,4 +51,39 @@ exports.obtenerCuatrimestreLicenciatura = async ( req, res ) => {
     } catch (error) {
         return res.status(400).json({ ok: false, error});
     }
+}
+
+//Obtener todos los cuatrimestre
+exports.obtenerTodosCuatrimestre = async ( req, res ) => {
+
+    try {
+        let cuatrimestre = await Cuatrimestre.find();
+        /*
+        if( !cuiatrimestre ){
+            return res.status(400).json({ ok: false, error: "No hay elementos" });
+        }
+        */
+
+        res.json({
+            ok: true,
+            cuatrimestre
+        });
+    } catch (error) {
+        return res.status(400).json({
+            ok: false,
+            error
+        });
+    }
+}
+
+//Actualizar por id cuatrimestre
+
+//Eliminar todos los cuatrimestre pertenicientes a una licenciatura
+exports.eliminandoCuatrimestreLicenciatura = async ( req, res ) => {
+    const id = req.params.id;
+}
+//Eliminar solo un cuatrimestre de una licenciatura
+ 
+exports.eliminandoCuatrimestre = async ( req, res ) => {
+    const id = req.params.id;
 }

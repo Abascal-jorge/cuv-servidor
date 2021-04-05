@@ -14,4 +14,8 @@ app.get("/cuatrimestre/:id",
     CuatrimestreControllers.obtenerCuatrimestreLicenciatura
 );
 
+app.get("/cuatrimestre", 
+    CuatrimestreControllers.obtenerTodosCuatrimestre
+);
+
 module.exports = app;

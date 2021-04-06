@@ -18,4 +18,12 @@ app.get("/cuatrimestre",
     CuatrimestreControllers.obtenerTodosCuatrimestre
 );
 
+app.delete("/cuatrimestre/:id",
+    CuatrimestreControllers.eliminandoCuatrimestre
+);
+
+app.delete("/eliminarcuatrimestre/:id",
+    CuatrimestreControllers.eliminandoCuatrimestreLicenciatura
+);
+
 module.exports = app;

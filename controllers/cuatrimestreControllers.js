@@ -81,9 +81,34 @@ exports.obtenerTodosCuatrimestre = async ( req, res ) => {
 //Eliminar todos los cuatrimestre pertenicientes a una licenciatura
 exports.eliminandoCuatrimestreLicenciatura = async ( req, res ) => {
     const id = req.params.id;
+    try {
+        let cuatrimestre = await Cuatrimestre.deleteMany({ licenciatura: id });
+        res.json({
+            ok: true,
+            msg: "Cuatrimestre de la licenciatura eliminados",
+            cuatrimestre
+        });
+    } catch (error) {
+        res.status(400).json({
+            ok: false,
+            error
+        });
+    }
 }
+
 //Eliminar solo un cuatrimestre de una licenciatura
- 
 exports.eliminandoCuatrimestre = async ( req, res ) => {
     const id = req.params.id;
+    try {
+        let cuatrismestre = await Cuatrimestre.findByIdAndDelete( id );
+        res.json({
+            ok: true,
+            cuatrismestre
+        });
+    } catch (error) {  
+        res.status(400).json({
+            ok: false,
+            cuatrimestre
+        });
+    }
 }

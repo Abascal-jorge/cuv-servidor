@@ -22,6 +22,10 @@ const NoticiasModel = Schema({
     },
     imagen2: {
         type: String
+    },
+    fecha:{
+        type: Date,
+        default: Date.now()
     }
 });
 

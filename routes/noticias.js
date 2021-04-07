@@ -10,4 +10,12 @@ app.post("/noticia",
     NoticiaControllers.agregarnoticia
 );
 
+app.delete("/noticia/:id", 
+     NoticiaControllers.eliminandoNoticia
+);
+
+app.put("/noticia/:id", 
+     NoticiaControllers.actualizandoNoticia
+);
+
 module.exports = app;  

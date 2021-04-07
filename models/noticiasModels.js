@@ -17,7 +17,16 @@ const NoticiasModel = Schema({
     tituloimagen:{
         type: String
     },
+    tituloimagen2:{
+        type: String
+    },
+    tituloimagen3:{
+        type: String
+    },
     imagen: {
+        type: String
+    },
+    imagen2: {
         type: String
     },
     imagen2: {

@@ -1,29 +1,17 @@
 const multer = require("multer");
-const shortid = require("shortid");
 const Licenciaturas = require("../models/LicenciaturasModels");
+const { multerconfiguracion } = require("../helpers/configuracionMulter");
 
 
 //Guarda la imagen especificada en la carpeta del servidor, y de igual manera actualiza la licenciatura
 // Agregando la url del servidor en la imagenen
 exports.subirArchivoImagen = async ( req, res, next) => {
 
-    const id = req.params.id
+    const id = req.params.id;
 
     //toma el nombre completo de la imagen, lo guarda en la posicion indica y pósteriormente separa el .extension del archivo y
     // y le crea uun nombre diferente con el shortid
-    const configuracionMulter = {
-        limits : { fileSize : 1024 * 1024 * 10 },
-        storage: fileStorage = multer.diskStorage({
-            destination: ( req, file, cb) => {
-                cb(null, __dirname+`/../cuvImagenes/licenciaturas`)
-            },
-            filename: ( req, file, cb)  => {
-                const extension = file.originalname.substring(file.originalname.lastIndexOf("."), file.originalname.length)
-                cb(null, `${shortid.generate()}${extension}`);
-            }
-        }) 
-    }
-
+    const configuracionMulter = multerconfiguracion("/../cuvImagenes/licenciaturas");
 
     try {
         let licenciatura = await Licenciaturas.findById( id );   
@@ -38,17 +26,18 @@ exports.subirArchivoImagen = async ( req, res, next) => {
                 licenciatura.imagen = archivodirectorio;
 
                 licenciatura = await Licenciaturas.findByIdAndUpdate({ _id: id }, { $set : licenciatura}, { new: true });
-        
+                
+                 //../cuvImagenes/licenciaturas`
+
                 res.json({ 
                     licenciatura
                 });
-                return next();
+
             }else{
                 console.log(error);
                 return next();
             }
         });
-
 
     } catch (error) {
         return res.status(400).json({

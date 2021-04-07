@@ -65,11 +65,22 @@ exports.actualizandoNoticia = async ( req, res ) => {
 
     const id = req.params.id;
 
-    try {
+    const error = validationResult(req);
 
-        let noticia = await Noticia.findById(id);
+    if( !error.isEmpty() ){
+        return res.status(400).json({
+            ok: false,
+            error: error.array()
+        });
+    }
+
+    try {
+        const datos = req.body;
+        console.log( datos );
+        const noticia = await Noticia.findByIdAndUpdate( id, datos, { new: true });
 
         res.json({
+            ok: true,
             noticia
         });
     } catch (error) {
@@ -77,6 +88,28 @@ exports.actualizandoNoticia = async ( req, res ) => {
             ok: false,
             error
         });
+    }
+
+}
+
+//Obtener todas las noticias
+exports.obtenerNoticias = async ( req, res ) => {
+
+    try {
+        
+        const noticias = await Noticia.find();
+
+        res.json({
+            ok: false,
+            noticias
+        });
+
+    } catch (error) {
+
+        return res.status().json({
+            ok: false,
+            error
+        });        
     }
 
 }

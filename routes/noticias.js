@@ -10,12 +10,19 @@ app.post("/noticia",
     NoticiaControllers.agregarnoticia
 );
 
+app.get("/noticia", 
+     NoticiaControllers.obtenerNoticias
+);
+
 app.delete("/noticia/:id", 
      NoticiaControllers.eliminandoNoticia
 );
 
 app.put("/noticia/:id", 
-     NoticiaControllers.actualizandoNoticia
+    check("titulo", "Necesitas agregar un titulo a tu noticia").not().isEmpty(),
+    check("noticia", "Necesitas agregar una noticia").not().isEmpty(),
+    check("descripcion", "Necesitas agregar una pequeña descripcion de la noticia").not().isEmpty(),
+    NoticiaControllers.actualizandoNoticia
 );
 
 module.exports = app;  

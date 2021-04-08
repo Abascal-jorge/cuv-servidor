@@ -1,7 +1,7 @@
 const multer = require("multer");
 const Licenciaturas = require("../models/LicenciaturasModels");
 const { multerconfiguracion } = require("../helpers/configuracionMulter");
-
+const { eliminandoImagenes } = require("../helpers/eliminarArchivos");
 
 //Guarda la imagen especificada en la carpeta del servidor, y de igual manera actualiza la licenciatura
 // Agregando la url del servidor en la imagenen
@@ -15,6 +15,11 @@ exports.subirArchivoImagen = async ( req, res, next) => {
 
     try {
         let licenciatura = await Licenciaturas.findById( id );   
+
+        //Eliminando la imagen que existe actualmente
+        if( licenciatura.imagen ){
+            eliminandoImagenes( licenciatura.imagen );
+        }
 
         const upload = multer(configuracionMulter).single("archivo");
 

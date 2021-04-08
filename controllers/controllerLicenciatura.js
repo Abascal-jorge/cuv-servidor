@@ -1,7 +1,6 @@
 const Licenciaturas = require("../models/LicenciaturasModels");
 const { validationResult } = require('express-validator');
-const fs = require("fs");
-
+const { eliminandoImagenes } = require("../helpers/eliminarArchivos");
 //Agregando una licenciatura a la base de datos
 exports.agregandoLicenciatura = async ( req, res ) => {
 
@@ -128,11 +127,7 @@ exports.eliminarLicenciatura = async ( req, res ) => {
         let licenciatura = await Licenciaturas.findByIdAndDelete(id);
 
         /* Elimina la imagen del servidor */
-        try {
-            fs.unlinkSync( licenciatura.imagen );
-        } catch (error) {
-            console.log(error);
-        }
+        eliminandoImagenes( licenciatura.imagen  );
         //////////////////////
 
         res.json({

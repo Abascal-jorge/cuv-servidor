@@ -2,6 +2,7 @@ const aws = require( 'aws-sdk' );
 const multerS3 = require( 'multer-s3' );
 const multer = require('multer');
 const path = require( 'path' );
+const { env } = require('process');
 
 exports.subiendoImagen = async ( req, res ) => {
 
@@ -9,9 +10,9 @@ exports.subiendoImagen = async ( req, res ) => {
          * PROFILE IMAGE STORING STARTS
          */
         const s3 = new aws.S3({
-            accessKeyId: 'AKIAUHHYU7UXCRWK4FDJ',
-            secretAccessKey: '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',
-            Bucket: 'rails-demo-production1'
+            accessKeyId: process.env.ACCESSKEYID,
+            secretAccessKey: process.env.SECRETACCESSKEY,
+            Bucket: process.env.BUCKET
         });
 
         /**
@@ -20,7 +21,7 @@ exports.subiendoImagen = async ( req, res ) => {
         const profileImgUpload = multer({
             storage: multerS3({
                 s3: s3,
-                bucket: 'rails-demo-production1',
+                bucket: process.env.BUCKET,
                 acl: 'public-read',
                 key: function (req, file, cb) {
                     cb(null, path.basename( file.originalname, path.extname( file.originalname ) ) + '-' + Date.now() + path.extname( file.originalname ) )

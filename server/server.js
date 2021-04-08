@@ -20,3 +20,14 @@ app.listen( process.env.PORT , () => {
     console.log( `Conectado al servidor en el puerto ${ process.env.PORT }` );
 });
 
+
+
+/**
+    datos aws 
+
+    arn de usuario: arn:aws:iam::290431761710:user/universidad
+
+    acces key id: AKIAUHHYU7UXCRWK4FDJ
+
+    secret key: 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
+ */

@@ -6,4 +6,8 @@ app.post("/subirImagenaws",
     Aws.subiendoImagen
 );
 
+app.post("/multiplesImagenes", 
+    Aws.multiples
+);
+
 module.exports = app;

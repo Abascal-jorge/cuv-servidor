@@ -2,7 +2,6 @@ const aws = require( 'aws-sdk' );
 const multerS3 = require( 'multer-s3' );
 const multer = require('multer');
 const path = require( 'path' );
-const { env } = require('process');
 
 exports.subiendoImagen = async ( req, res ) => {
 
@@ -31,16 +30,16 @@ exports.subiendoImagen = async ( req, res ) => {
         }).single('archivos');
 
         profileImgUpload( req, res, ( error ) => {
-            console.log( 'requestOkokok', req.file );
-            console.log( 'error', error );
+            //console.log( 'requestOkokok', req.file );
+            //console.log( 'error', error );
             if( error ){
-                console.log( 'errors', error );
-                res.json( { error: error } );
+                //console.log( 'errors', error );
+                return res.status(400).json( { error: error } );
             } else {
                 // If File not found
                 if( req.file === undefined ){
-                    console.log( 'Error: No File Selected!' );
-                    res.json( 'Error: No File Selected' );
+                    //console.log( 'Error: No File Selected!' );
+                    return res.status(400).json( 'Error: No File Selected' );
                 } else {
                     // If Success
                     const imageName = req.file.key;

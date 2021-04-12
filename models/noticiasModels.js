@@ -23,13 +23,16 @@ const NoticiasModel = Schema({
     tituloimagen3:{
         type: String
     },
-    imagen: {
+    imagen0: {
+        type: String
+    },
+    imagen1: {
         type: String
     },
     imagen2: {
         type: String
     },
-    imagen2: {
+    imagen3: {
         type: String
     },
     fecha:{

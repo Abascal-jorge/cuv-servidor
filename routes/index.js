@@ -7,5 +7,6 @@ app.use( require("./cuatrimeste") );
 app.use( require("./noticias") );
 app.use( require("./envioCorreo") );
 app.use( require("./awsArchivos") );
+app.use( require("./galeria") );
 
 module.exports = app;

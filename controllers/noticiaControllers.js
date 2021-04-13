@@ -76,7 +76,7 @@ exports.actualizandoNoticia = async ( req, res ) => {
 
     try {
         const datos = req.body;
-        console.log( datos );
+        //console.log( datos );
         const noticia = await Noticia.findByIdAndUpdate( id, datos, { new: true });
 
         res.json({
@@ -94,7 +94,6 @@ exports.actualizandoNoticia = async ( req, res ) => {
 
 //Obtener todas las noticias
 exports.obtenerNoticias = async ( req, res ) => {
-
     try {
         
         const noticias = await Noticia.find();

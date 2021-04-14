@@ -99,7 +99,7 @@ exports.obtenerNoticias = async ( req, res ) => {
         const noticias = await Noticia.find();
 
         res.json({
-            ok: false,
+            ok: true,
             noticias
         });
 

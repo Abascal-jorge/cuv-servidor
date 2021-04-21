@@ -14,6 +14,10 @@ app.get("/noticia",
      NoticiaControllers.obtenerNoticias
 );
 
+app.get("/noticia/:id", 
+     NoticiaControllers.obtenernoticiaseleccionada
+);
+
 app.delete("/noticia/:id", 
      NoticiaControllers.eliminandoNoticia
 );

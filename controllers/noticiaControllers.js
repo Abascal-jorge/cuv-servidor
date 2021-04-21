@@ -112,3 +112,34 @@ exports.obtenerNoticias = async ( req, res ) => {
     }
 
 }
+
+exports.obtenernoticiaseleccionada = async ( req, res ) => {
+
+    const id = req.params.id;
+
+    try {
+        
+        const noticia = await Noticia.findById( id );
+
+        if( !noticia ){
+            return res.status(400).json({
+                ok: false,
+                error: "No se encontraron noticias"
+            });
+        }
+
+        res.json({
+            ok: true,
+            noticia
+        });
+
+    } catch (error) {
+
+        return res.status(400).json({
+            ok: false,
+            error
+        });
+
+    }
+
+}
